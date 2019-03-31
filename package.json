@@ -1,0 +1,34 @@
+{
+  "name": "express-openapi-mongoose-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "./node_modules/.bin/eslint **.js",
+    "start": "node app.js 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niabb/express-openapi-mongoose-template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/niabb/express-openapi-mongoose-template/issues"
+  },
+  "homepage": "https://github.com/niabb/express-openapi-mongoose-template#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-openapi": "^4.5.0",
+    "mongoose": "^5.4.20",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
+  }
+}
