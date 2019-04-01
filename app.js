@@ -5,6 +5,9 @@ const openapi = require('express-openapi');
 const path = require('path');
 const cors = require('cors');
 
+const config = require('./config');
+const logger = require('./logger');
+
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -12,7 +15,7 @@ openapi.initialize({
   apiDoc: fs.readFileSync(path.resolve(__dirname, 'api-doc.yml'), 'utf8'),
   app,
   paths: path.resolve(__dirname, 'routes'),
-  operations: {},
+  promiseMode: true,
 });
 
 function errorHandler(err, req, res, next) { // eslint-disable-line no-unused-vars
@@ -23,7 +26,5 @@ app.use(errorHandler);
 
 module.exports = app;
 
-const port = parseInt(process.argv[2], 10);
-if (port) {
-  app.listen(port);
-}
+app.listen(config.port);
+logger.info(`Open API started in ${process.env.NODE_ENV} mode, listening on port ${config.port}.`);
