@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "./node_modules/.bin/eslint **.js",
     "start": "node app.js",
-    "watch" : "./node_modules/.bin/nodemon app.js"
+    "watch": "./node_modules/.bin/nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -20,10 +20,13 @@
   },
   "homepage": "https://github.com/niabb/express-openapi-mongoose-template#readme",
   "dependencies": {
+    "bcrypt": "^3.0.5",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "express-bearer-token": "^2.2.0",
     "express-openapi": "^4.5.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.4.20",
     "winston": "^3.2.1"
   },
