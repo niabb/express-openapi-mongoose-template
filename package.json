@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/mocha ./tests/*.js",
     "eslint": "./node_modules/.bin/eslint **.js",
     "start": "node app.js",
     "watch": "./node_modules/.bin/nodemon app.js"
@@ -31,9 +31,12 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
+    "mocha": "^6.0.2",
     "nodemon": "^1.18.10"
   }
 }
