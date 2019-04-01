@@ -8,6 +8,8 @@ const cors = require('cors');
 const config = require('./config');
 const logger = require('./logger');
 
+require('./mongo.js');
+
 app.use(cors());
 app.use(bodyParser.json());
 

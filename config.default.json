@@ -3,5 +3,6 @@
   "log": {
     "level": "debug",
     "file": "./openApi.log"
-  }
+  },
+  "mongoUri": "mongoConnectionString"
 }
