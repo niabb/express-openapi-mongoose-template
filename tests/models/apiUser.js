@@ -11,13 +11,6 @@ const password = 'password';
 
 
 describe('ApiUser', () => {
-  // before((done) => {
-  //   ApiUser.deleteMany({}).then(() => {
-  //     done();
-  //   });
-  // });
-
-
   it('#insert', (done) => {
     ApiUser
       .generatePassword(password)
@@ -43,7 +36,7 @@ describe('ApiUser', () => {
   });
 
   it('#delete', (done) => {
-    ApiUser.deleteMany({}).then(() => {
+    ApiUser.deleteMany({ username }).then(() => {
       done();
     });
   });

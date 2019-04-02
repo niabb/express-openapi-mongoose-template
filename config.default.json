@@ -4,5 +4,9 @@
     "level": "debug",
     "file": "./openApi.log"
   },
-  "mongoUri": "mongoConnectionString"
+  "mongoUri": "mongoConnectionString",
+  "jwt": {
+    "secret": "something",
+    "duration": "12h"
+  }
 }

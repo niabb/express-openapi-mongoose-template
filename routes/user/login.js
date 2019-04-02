@@ -15,7 +15,7 @@ async function post(req, res) {
       config.jwt.secret,
       { expiresIn: config.jwt.duration },
     );
-    return res.json(token);
+    return res.json({ token });
   }
   res.status(401);
   return res.json({ error: 'Invalid password.' });
