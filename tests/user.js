@@ -12,6 +12,8 @@ chai.should();
 const username = 'testAdmin';
 const password = '4dm1n';
 const roles = ['admin', 'everything'];
+let token = '';
+const expiredToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTU0MjM0MDgxLCJleHAiOjE1NTQyMzQwODJ9.w84x0YHc5UAFisNhtsEW9cenYk7Kj6sqqSTNgVHLSC8';
 
 describe('/user', () => {
   before((done) => {
@@ -71,25 +73,51 @@ describe('/user', () => {
           res.should.have.status(200);
           res.body.should.be.a('object');
           res.body.should.have.property('token').which.is.a('string');
+          ({ token } = res.body);
           done();
         });
     });
   });
-  // describe('/getRoles', () => {
-  //   it('should get a 400 error sending only the username', (done) => {
-  //     chai.request(app)
-  //       .post('/user/login')
-  //       .send({ username: 'dashboard' })
-  //       .end((err, res) => {
-  //         res.should.have.status(400);
-  //         res.body.should.be.a('object');
-  //         res.body.should.have.property('error', 'Request validation error.');
-  //         res.body.should.have.property('details');
-  //         res.body.details.should.be.instanceof(Array);
-  //         done();
-  //       });
-  //   });
-  // });
+  describe('/getRoles', () => {
+    it('should get the user roles providing a correct token', (done) => {
+      chai.request(app)
+        .get('/user/getRoles')
+        .set('Authorization', `Bearer ${token}`)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('roles');
+          res.body.roles.should.be.instanceof(Array).and.have.lengthOf(2).and.include('admin').and.include('everything');
+          done();
+        });
+    });
+    it('should get a 400 error providing an incorrect token', (done) => {
+      chai.request(app)
+        .get('/user/getRoles')
+        .set('Authorization', 'Bearer something')
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('error', 'Request validation error.');
+          res.body.should.have.property('details');
+          res.body.details.should.be.instanceof(Array).and.have.lengthOf(1).and.include('jwt malformed');
+          done();
+        });
+    });
+    it('should get a 400 error providing an expired token', (done) => {
+      chai.request(app)
+        .get('/user/getRoles')
+        .set('Authorization', `Bearer ${expiredToken}`)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('error', 'Request validation error.');
+          res.body.should.have.property('details');
+          res.body.details.should.be.instanceof(Array).and.have.lengthOf(1).and.include('jwt expired');
+          done();
+        });
+    });
+  });
 
   after((done) => {
     ApiUser.deleteMany({ username }).then(() => {
