@@ -12,10 +12,11 @@ const password = 'password';
 
 describe('ApiUser', () => {
   // before((done) => {
-  //   mongoose
-  //     .connect(mongoUri, { useNewUrlParser: true })
-  //     .then(() => done(), () => assert.fail());
+  //   ApiUser.deleteMany({}).then(() => {
+  //     done();
+  //   });
   // });
+
 
   it('#insert', (done) => {
     ApiUser
@@ -24,7 +25,7 @@ describe('ApiUser', () => {
         ApiUser.create({
           username,
           password: hashed,
-        }).then((createdUser) => {  
+        }).then((createdUser) => {
           createdUser.should.be.a('object');
           createdUser.should.have.property('username', 'victim');
           done();
@@ -32,17 +33,18 @@ describe('ApiUser', () => {
       });
   });
 
-  // it('#find', (done) => {
-  //   ApiUser.find({ username })
-  //     .then(() => done(),
-  //       () => assert.fail());
-  // });
+  it('#find', (done) => {
+    ApiUser.findOne({ username })
+      .then((foundUser) => {
+        foundUser.should.be.a('object');
+        foundUser.should.have.property('username', 'victim');
+        done();
+      });
+  });
 
-  // it('#delete', (done) => {
-  //   ApiUser.deleteMany({ username })
-  //     .then(() => {
-  //       mongoose.disconnect();
-  //       done();
-  //     }, () => assert.fail());
-  // });
+  it('#delete', (done) => {
+    ApiUser.deleteMany({}).then(() => {
+      done();
+    });
+  });
 });
