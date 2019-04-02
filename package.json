@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha ./tests/*.js",
+    "test": "./node_modules/.bin/mocha ./tests --recursive --exit",
     "eslint": "./node_modules/.bin/eslint **.js",
     "start": "node app.js",
     "watch": "./node_modules/.bin/nodemon app.js"
