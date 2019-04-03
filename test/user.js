@@ -11,7 +11,6 @@ chai.use(chaiHttp);
 chai.should();
 
 let token = '';
-const expiredToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTU0MjM0MDgxLCJleHAiOjE1NTQyMzQwODJ9.w84x0YHc5UAFisNhtsEW9cenYk7Kj6sqqSTNgVHLSC8';
 
 describe('/user', () => {
   before((done) => {
@@ -100,7 +99,7 @@ describe('/user', () => {
     it('should get a 400 error providing an expired token', (done) => {
       chai.request(app)
         .get('/user/getRoles')
-        .set('Authorization', `Bearer ${expiredToken}`)
+        .set('Authorization', `Bearer ${userFixture.getExpiredTokenWithRoles(['admin'])}`)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
