@@ -3,31 +3,21 @@ const chaiHttp = require('chai-http');
 
 const app = require('../app');
 
-const ApiUser = require('../models/apiUser');
+
+const userFixture = require('../test-fixtures/user');
 
 
 chai.use(chaiHttp);
 chai.should();
 
-const username = 'testAdmin';
-const password = '4dm1n';
-const roles = ['admin', 'everything'];
 let token = '';
 const expiredToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTU0MjM0MDgxLCJleHAiOjE1NTQyMzQwODJ9.w84x0YHc5UAFisNhtsEW9cenYk7Kj6sqqSTNgVHLSC8';
 
 describe('/user', () => {
   before((done) => {
-    ApiUser
-      .generatePassword(password)
-      .then((hashed) => {
-        ApiUser.create({
-          username,
-          password: hashed,
-          roles,
-        }).then(() => {
-          done();
-        });
-      });
+    userFixture.createTestUser(['admin']).then(() => {
+      done();
+    });
   });
   describe('/login', () => {
     it('should get a 400 error sending only the username', (done) => {
@@ -57,7 +47,7 @@ describe('/user', () => {
     it('should get a 401 error trying to log in with an existing user but a wrong password', (done) => {
       chai.request(app)
         .post('/user/login')
-        .send({ username, password: 'whatever' })
+        .send({ username: userFixture.testUser.username, password: 'whatever' })
         .end((err, res) => {
           res.should.have.status(401);
           res.body.should.be.a('object');
@@ -68,7 +58,10 @@ describe('/user', () => {
     it('should get a JWT loging with an existing user', (done) => {
       chai.request(app)
         .post('/user/login')
-        .send({ username, password })
+        .send({
+          username: userFixture.testUser.username,
+          password: userFixture.testUser.password,
+        })
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -87,7 +80,7 @@ describe('/user', () => {
           res.should.have.status(200);
           res.body.should.be.a('object');
           res.body.should.have.property('roles');
-          res.body.roles.should.be.instanceof(Array).and.have.lengthOf(2).and.include('admin').and.include('everything');
+          res.body.roles.should.be.instanceof(Array).and.have.lengthOf(1).and.include('admin');
           done();
         });
     });
@@ -120,7 +113,7 @@ describe('/user', () => {
   });
 
   after((done) => {
-    ApiUser.deleteMany({ username }).then(() => {
+    userFixture.deleteTestUser().then(() => {
       done();
     });
   });
