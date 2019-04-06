@@ -15,5 +15,5 @@ mongoose.connection.on('disconnected', (err) => {
 });
 
 module.exports = mongoose.connect(
-  config.mongoUri, { useNewUrlParser: true },
+  config.mongoUri, { useNewUrlParser: true, useFindAndModify: false },
 );
