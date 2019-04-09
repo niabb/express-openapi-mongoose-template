@@ -54,7 +54,7 @@ describe('/user', () => {
           done();
         });
     });
-    it('should get a JWT loging with an existing user', (done) => {
+    it('should get a JWT logging in with an existing user', (done) => {
       chai.request(app)
         .post('/user/login')
         .send({

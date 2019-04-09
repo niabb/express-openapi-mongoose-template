@@ -22,7 +22,7 @@ paths:
   /user/login:
     post:
       summary: Authenticates a user and returns a JSON Web Token.
-      operationId: /login
+      operationId: login
       tags:
         - user
       requestBody:
