@@ -35,7 +35,7 @@ function errorMiddleware(err, req, res, next) {
   }
   // This should handle schema validation errors
   if (err.errors) {
-    response.details.push(...err.errors.map(e => `${e.location} ${e.message}`));
+    response.details.push(...err.errors.map(e => `${e.path} in ${e.location} ${e.message}`));
   }
   res.status(400);
   res.json(response);
