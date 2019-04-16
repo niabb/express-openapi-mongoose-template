@@ -10,7 +10,10 @@ const jwt = require('jsonwebtoken');
 const config = require('./config');
 const logger = require('./lib/logger');
 
+module.exports = app;
+
 require('./lib/mongoose');
+
 
 app.use(bearerToken());
 
@@ -80,7 +83,7 @@ function errorHandler(err, req, res, next) { // eslint-disable-line no-unused-va
 
 app.use(errorHandler);
 
-module.exports = app;
 
-app.listen(config.port);
+app.server = app.listen(config.port);
 logger.info(`Open API started in ${process.env.NODE_ENV} mode, listening on port ${config.port}.`);
+require('./lib/websocket');
