@@ -8,9 +8,9 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 
 const config = require('./config');
-const logger = require('./logger');
+const logger = require('./lib/logger');
 
-require('./mongo.js');
+require('./lib/mongoose');
 
 app.use(bearerToken());
 

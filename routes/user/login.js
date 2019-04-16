@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const ApiUser = require('../../models/apiUser');
 const config = require('../../config');
-const logger = require('../../logger');
+const logger = require('../../lib/logger');
 
 
 async function post(req, res) {

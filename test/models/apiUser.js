@@ -1,6 +1,6 @@
 const chai = require('chai');
 
-require('../../mongo');
+require('../../lib/mongoose');
 const ApiUser = require('../../models/apiUser');
 
 chai.should();
