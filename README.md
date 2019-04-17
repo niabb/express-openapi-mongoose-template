@@ -4,7 +4,7 @@ This template uses:
 * winston for logging
 * mongoose as MongoDB ORM
 * JSON web token for authentication
-* Native WebSockets.
+* Socket.io for websocket communication.
 
 For the development:
 * Linting with eslint and Airbnb rule

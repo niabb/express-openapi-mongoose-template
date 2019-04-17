@@ -86,4 +86,4 @@ app.use(errorHandler);
 
 app.server = app.listen(config.port);
 logger.info(`Open API started in ${process.env.NODE_ENV} mode, listening on port ${config.port}.`);
-require('./lib/websocket');
+require('./lib/socketIo');
