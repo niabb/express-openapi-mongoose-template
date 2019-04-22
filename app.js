@@ -56,7 +56,7 @@ function bearerAuth(req /* , scopes, definition */) {
     // console.log(req.token);
     try {
       const decoded = jwt.verify(req.token, config.jwt.secret);
-      logger.debug(decoded);
+      // logger.debug(decoded);
       req.decodedToken = decoded;
       return Promise.resolve(decoded);
     } catch (err) {
@@ -65,6 +65,7 @@ function bearerAuth(req /* , scopes, definition */) {
   }
   return Promise.reject(new Error('You must provide a token.'));
 }
+app.bearerAuth = bearerAuth;
 
 openapi.initialize({
   apiDoc: fs.readFileSync(path.resolve(__dirname, 'api-doc.yml'), 'utf8'),
