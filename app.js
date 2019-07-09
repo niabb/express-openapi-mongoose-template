@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 
 const config = require('./config');
 const logger = require('./lib/logger');
+const io = require('./lib/socketIo');
 
 module.exports = app;
 
@@ -87,4 +88,4 @@ app.use(errorHandler);
 
 app.server = app.listen(config.port);
 logger.info(`Open API started in ${process.env.NODE_ENV} mode, listening on port ${config.port}.`);
-require('./lib/socketIo');
+io.init(app.server, app.bearerAuth);
