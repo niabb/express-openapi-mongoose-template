@@ -6,6 +6,9 @@ const bearerToken = require('express-bearer-token');
 const path = require('path');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const swaggerUi = require('swagger-ui-express');
+const yaml = require('js-yaml');
+
 
 const config = require('./config');
 const logger = require('./lib/logger');
@@ -67,9 +70,12 @@ function bearerAuth(req /* , scopes, definition */) {
   return Promise.reject(new Error('You must provide a token.'));
 }
 app.bearerAuth = bearerAuth;
+const apiDoc = yaml.safeLoad(fs.readFileSync(path.resolve(__dirname, 'api-doc.yml'), 'utf8'));
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDoc));
 
 openapi.initialize({
-  apiDoc: fs.readFileSync(path.resolve(__dirname, 'api-doc.yml'), 'utf8'),
+  apiDoc,
   app,
   paths: path.resolve(__dirname, 'routes'),
   securityHandlers: {
@@ -78,6 +84,7 @@ openapi.initialize({
   errorMiddleware,
   promiseMode: true,
 });
+
 
 function errorHandler(err, req, res, next) { // eslint-disable-line no-unused-vars
   res.status(err.status).json(err);
