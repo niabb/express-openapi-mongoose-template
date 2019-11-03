@@ -13,10 +13,8 @@ chai.should();
 let token = '';
 
 describe('/user', () => {
-  before((done) => {
-    userFixture.createTestUser(['admin']).then(() => {
-      done();
-    });
+  before(async () => {
+    await userFixture.createTestUser(['admin']);
   });
   describe('/login', () => {
     it('should get a 400 error sending only the username', (done) => {
@@ -111,9 +109,7 @@ describe('/user', () => {
     });
   });
 
-  after((done) => {
-    userFixture.deleteTestUser().then(() => {
-      done();
-    });
+  after(async () => {
+    await userFixture.deleteTestUser();
   });
 });

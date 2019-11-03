@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha --recursive --exit",
-    "eslint": "./node_modules/.bin/eslint .",
+    "lint": "./node_modules/.bin/eslint .",
     "start": "node app.js",
     "watch": "./node_modules/.bin/nodemon app.js"
   },
@@ -23,21 +23,23 @@
     "bcrypt": "3.0.6",
     "body-parser": "1.19.0",
     "cors": "2.8.5",
-    "express": "4.16.4",
+    "express": "4.17.1",
     "express-bearer-token": "2.4.0",
-    "express-openapi": "4.6.1",
+    "express-openapi": "5.0.0",
     "jsonwebtoken": "8.5.1",
-    "mongoose": "5.5.8",
-    "socket.io": "2.2.0",
+    "mongoose": "5.7.7",
+    "socket.io": "2.3.0",
     "winston": "3.2.1"
   },
   "devDependencies": {
     "chai": "4.2.0",
     "chai-http": "4.3.0",
-    "eslint": "5.16.0",
-    "eslint-config-airbnb-base": "13.1.0",
-    "eslint-plugin-import": "2.17.2",
-    "mocha": "6.1.4",
-    "nodemon": "1.19.0"
+    "eslint": "6.6.0",
+    "eslint-config-airbnb-base": "14.0.0",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-you-dont-need-lodash-underscore": "^6.8.0",
+    "mocha": "6.2.2",
+    "nodemon": "1.19.4"
   }
 }

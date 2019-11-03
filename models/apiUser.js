@@ -12,7 +12,7 @@ const apiUserSchema = new mongoose.Schema({
  * @param  {String} password the plain text password
  * @returns {Promise} It should return the hashed password
  */
-apiUserSchema.statics.generatePassword = async password => bcrypt.hash(password, 10);
+apiUserSchema.statics.generatePassword = async (password) => bcrypt.hash(password, 10);
 
 
 /**

@@ -11,33 +11,23 @@ const password = 'password';
 
 
 describe('ApiUser', () => {
-  it('#insert', (done) => {
-    ApiUser
-      .generatePassword(password)
-      .then((hashed) => {
-        ApiUser.create({
-          username,
-          password: hashed,
-        }).then((createdUser) => {
-          createdUser.should.be.a('object');
-          createdUser.should.have.property('username', 'victim');
-          done();
-        });
-      });
-  });
-
-  it('#find', (done) => {
-    ApiUser.findOne({ username })
-      .then((foundUser) => {
-        foundUser.should.be.a('object');
-        foundUser.should.have.property('username', 'victim');
-        done();
-      });
-  });
-
-  it('#delete', (done) => {
-    ApiUser.deleteMany({ username }).then(() => {
-      done();
+  it('#insert', async () => {
+    const hashed = await ApiUser.generatePassword(password);
+    const createdUser = await ApiUser.create({
+      username,
+      password: hashed,
     });
+    createdUser.should.be.a('object');
+    createdUser.should.have.property('username', 'victim');
+  });
+
+  it('#find', async () => {
+    const foundUser = await ApiUser.findOne({ username });
+    foundUser.should.be.a('object');
+    foundUser.should.have.property('username', 'victim');
+  });
+
+  it('#delete', async () => {
+    await ApiUser.deleteMany({ username });
   });
 });

@@ -5,7 +5,8 @@
         "node": true,
         "mocha": true
     },
-    "extends": "airbnb-base",
+    "plugins": ["promise", "you-dont-need-lodash-underscore"],
+    "extends": ["airbnb-base", "plugin:you-dont-need-lodash-underscore/compatible", "plugin:promise/recommended"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
