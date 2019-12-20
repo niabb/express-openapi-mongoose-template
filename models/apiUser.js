@@ -14,6 +14,11 @@ const apiUserSchema = new mongoose.Schema({
  */
 apiUserSchema.statics.generatePassword = async (password) => bcrypt.hash(password, 10);
 
+async function getUser(username) {
+  return this.findOne({ username });
+}
+apiUserSchema.statics.getUser = getUser;
+
 
 /**
  * This function is used to check if the provided password matches the stored hashed password
