@@ -12,7 +12,10 @@ const apiUserSchema = new mongoose.Schema({
  * @param  {String} password the plain text password
  * @returns {Promise} It should return the hashed password
  */
-apiUserSchema.statics.generatePassword = async (password) => bcrypt.hash(password, 10);
+async function generatePassword(password) {
+  return bcrypt.hash(password, 10);
+}
+apiUserSchema.statics.generatePassword = generatePassword;
 
 async function getUser(username) {
   return this.findOne({ username });
@@ -28,5 +31,17 @@ apiUserSchema.statics.getUser = getUser;
 apiUserSchema.methods.checkPassword = function async(providedPassword) {
   return bcrypt.compare(providedPassword, this.password);
 };
+
+/**
+ * Insert a user with a hashed password in the database
+ * @param {String} username
+ * @param {String} clearPassword
+ * @param {Array} roles the list of roles
+ */
+async function createUser(username, clearPassword, roles) {
+  const hashedPassword = await generatePassword(clearPassword);
+  return this.create({ username, password: hashedPassword, roles });
+}
+apiUserSchema.statics.createUser = createUser;
 
 module.exports = mongoose.model('ApiUser', apiUserSchema);

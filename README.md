@@ -5,6 +5,7 @@ This template uses:
 * mongoose as MongoDB ORM
 * JSON web token for authentication
 * Socket.io for websocket communication.
+* Swagger UI for the API documentation
 
 For the development:
 * Linting with eslint and Airbnb rule
