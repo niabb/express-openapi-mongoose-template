@@ -3,9 +3,7 @@ const chaiHttp = require('chai-http');
 
 const app = require('../app');
 
-
 const userFixture = require('../test-fixtures/user');
-
 
 chai.use(chaiHttp);
 chai.should();

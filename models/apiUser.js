@@ -19,7 +19,6 @@ async function getUser(username) {
 }
 apiUserSchema.statics.getUser = getUser;
 
-
 /**
  * This function is used to check if the provided password matches the stored hashed password
  * of an existing user.

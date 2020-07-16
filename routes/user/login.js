@@ -4,7 +4,6 @@ const ApiUser = require('../../models/apiUser');
 const config = require('../../config');
 const logger = require('../../lib/logger');
 
-
 async function post(req, res) {
   try {
     const foundUser = await ApiUser.getUser(req.body.username);
@@ -30,6 +29,5 @@ async function post(req, res) {
     return res.status(500).json({ error });
   }
 }
-
 
 module.exports = { post };

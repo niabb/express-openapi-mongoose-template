@@ -9,7 +9,6 @@ const jwt = require('jsonwebtoken');
 const swaggerUi = require('swagger-ui-express');
 const yaml = require('js-yaml');
 
-
 const config = require('./config');
 const logger = require('./lib/logger');
 const io = require('./lib/socketIo');
@@ -17,7 +16,6 @@ const io = require('./lib/socketIo');
 module.exports = app;
 
 require('./lib/mongoose');
-
 
 app.use(bearerToken());
 
@@ -85,13 +83,11 @@ openapi.initialize({
   promiseMode: true,
 });
 
-
 function errorHandler(err, req, res, next) { // eslint-disable-line no-unused-vars
   res.status(err.status).json(err);
 }
 
 app.use(errorHandler);
-
 
 app.server = app.listen(config.port);
 logger.info(`Open API started in ${process.env.NODE_ENV} mode, listening on port ${config.port}.`);

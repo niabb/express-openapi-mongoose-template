@@ -37,7 +37,6 @@ function getExpiredTokenWithRoles(roles) {
   return getToken(roles, 0);
 }
 
-
 module.exports = {
   testUser,
   createTestUser,

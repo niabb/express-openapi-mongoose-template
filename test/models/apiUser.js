@@ -5,10 +5,8 @@ const ApiUser = require('../../models/apiUser');
 
 chai.should();
 
-
 const username = 'victim';
 const password = 'password';
-
 
 describe('ApiUser', () => {
   it('#insert', async () => {
