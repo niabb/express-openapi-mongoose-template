@@ -1,5 +1,6 @@
 # express-openapi-mongoose-template
-Template for quick production ready REST API, based on the OAS 3 protocol.
+Template for quickly creating a production ready REST API, compliant to the [OAS 3 protocol](https://swagger.io/specification/).
+
 This template uses:
 * winston for logging
 * mongoose as MongoDB ORM
@@ -11,7 +12,7 @@ For the development:
 * Linting with eslint and Airbnb rule
 * Mocha/chai/should for unit testing
 
-When running, the API definition file is served on /api-docs
+When running, the API definition file is served on /api-docs.
 
 ## How to clone and keep up to date
 Clone:
@@ -27,3 +28,13 @@ Keep up to date:
 ```
 git pull upstream master
 ```
+
+## How to run the app
+Create the configuration file: `cp config.default.json config.json`
+and edit it to match your environment.
+Then start the app: `npm run start`
+
+## Development
+Run the app in development mode with nodemon: `npm run watch`
+Run ESLint: `npm run lint`
+Play unit tests: `npm run test`

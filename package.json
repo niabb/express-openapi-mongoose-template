@@ -26,10 +26,10 @@
     "cors": "2.8.5",
     "express": "4.17.1",
     "express-bearer-token": "2.4.0",
-    "express-openapi": "6.0.0",
+    "express-openapi": "7.0.0",
     "js-yaml": "3.14.0",
     "jsonwebtoken": "8.5.1",
-    "mongoose": "5.9.24",
+    "mongoose": "5.9.26",
     "socket.io": "2.3.0",
     "swagger-ui-express": "4.1.4",
     "winston": "3.3.3"
@@ -37,7 +37,7 @@
   "devDependencies": {
     "chai": "4.2.0",
     "chai-http": "4.3.0",
-    "eslint": "7.4.0",
+    "eslint": "7.5.0",
     "eslint-config-airbnb-base": "14.2.0",
     "eslint-plugin-import": "2.22.0",
     "eslint-plugin-promise": "4.2.1",
