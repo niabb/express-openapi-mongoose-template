@@ -39,7 +39,7 @@ Run the app in development mode with nodemon: `npm run watch`
 Run ESLint: `npm run lint`
 Play unit tests: 
 ```
-# First, create the test.env file and fill it to match the test environment
-cp default.env test.env
+# First, create the test .env file and fill it to match the test environment
+cp default.env test/.env
 npm run test
 ```
