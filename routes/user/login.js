@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 
 const ApiUser = require('../../models/apiUser');
-const config = require('../../config');
 const logger = require('../../lib/logger');
 
 async function post(req, res) {
@@ -15,8 +14,8 @@ async function post(req, res) {
     if (await foundUser.checkPassword(req.body.password)) {
       const token = jwt.sign(
         { username: foundUser.username, roles: foundUser.roles },
-        config.jwt.secret,
-        { expiresIn: config.jwt.duration },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_DURATION },
       );
       logger.info(`Successful login for user ${req.body.username}`);
       return res.json({ token });

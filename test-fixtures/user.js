@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 
 const ApiUser = require('../models/apiUser');
-const config = require('../config');
 
 const testUser = {
   username: 'testUser',
@@ -24,13 +23,13 @@ async function deleteTestUser() {
 function getToken(roles, duration) {
   return jwt.sign(
     { username: testUser.username, roles },
-    config.jwt.secret,
+    process.env.JWT_SECRET,
     { expiresIn: duration },
   );
 }
 
 function getValidTokenWithRoles(roles) {
-  return getToken(roles, config.jwt.duration);
+  return getToken(roles, process.env.JWT_DURATION);
 }
 
 function getExpiredTokenWithRoles(roles) {

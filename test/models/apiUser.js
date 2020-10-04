@@ -1,3 +1,4 @@
+require('dotenv').config('../../test.env');
 const chai = require('chai');
 
 require('../../lib/mongoose');

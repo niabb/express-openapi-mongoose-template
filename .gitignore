@@ -1,5 +1,4 @@
 # Custom config file
-config.json
 *package-lock.json
 
 # Logs
@@ -60,6 +59,7 @@ typings/
 
 # dotenv environment variables file
 .env
+test.env
 
 # next.js build output
 .next

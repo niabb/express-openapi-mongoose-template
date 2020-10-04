@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const app = require('express')();
 const bodyParser = require('body-parser');
 const fs = require('fs');
@@ -9,7 +11,6 @@ const jwt = require('jsonwebtoken');
 const swaggerUi = require('swagger-ui-express');
 const yaml = require('js-yaml');
 
-const config = require('./config');
 const logger = require('./lib/logger');
 const io = require('./lib/socketIo');
 
@@ -57,7 +58,7 @@ function bearerAuth(req /* , scopes, definition */) {
   if (req.token) {
     // console.log(req.token);
     try {
-      const decoded = jwt.verify(req.token, config.jwt.secret);
+      const decoded = jwt.verify(req.token, process.env.JWT_SECRET);
       // logger.debug(decoded);
       req.decodedToken = decoded;
       return Promise.resolve(decoded);
@@ -89,6 +90,7 @@ function errorHandler(err, req, res, next) { // eslint-disable-line no-unused-va
 
 app.use(errorHandler);
 
-app.server = app.listen(config.port);
-logger.info(`Open API started in ${process.env.NODE_ENV} mode, listening on port ${config.port}.`);
+const port = parseInt(process.env.PORT, 10);
+app.server = app.listen(port);
+logger.info(`Open API started in ${process.env.NODE_ENV} mode, listening on port ${port}.`);
 io.init(app.server, app.bearerAuth);
