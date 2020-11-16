@@ -13,6 +13,7 @@ const yaml = require('js-yaml');
 
 const logger = require('./lib/logger');
 const io = require('./lib/socketIo');
+const fileUpload = require('./lib/fileUpload');
 
 module.exports = app;
 
@@ -21,7 +22,6 @@ require('./lib/mongoose');
 app.use(bearerToken());
 
 app.use(cors());
-app.use(bodyParser.json());
 
 /**
  * This is the error middleware provided to the express-openapi module, to handle schema validation
@@ -82,6 +82,11 @@ openapi.initialize({
   },
   errorMiddleware,
   promiseMode: true,
+  consumesMiddleware: {
+    'application/json': bodyParser.json(),
+    'text/text': bodyParser.text(),
+    'multipart/form-data': fileUpload.fileMiddleware,
+  },
 });
 
 function errorHandler(err, req, res, next) { // eslint-disable-line no-unused-vars
