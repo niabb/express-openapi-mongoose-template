@@ -17,7 +17,7 @@ const fileUpload = require('./lib/fileUpload');
 
 module.exports = app;
 
-require('./lib/mongoose');
+const mongoose = require('./lib/mongoose');
 
 app.use(bearerToken());
 
@@ -99,3 +99,21 @@ const port = parseInt(process.env.PORT, 10);
 app.server = app.listen(port);
 logger.info(`Open API started in ${process.env.NODE_ENV} mode, listening on port ${port}.`);
 io.init(app.server, app.bearerAuth);
+
+function closeServer() {
+  logger.info('Gracefully shutting down.');
+  mongoose.disconnect();
+  app.server.close(() => {
+    logger.info('HTTP server closed.');
+    setTimeout(process.exit, 2000);
+  });
+}
+
+process.on('SIGINT', () => {
+  logger.info('Received SIGINT.');
+  closeServer();
+});
+process.on('SIGTERM', () => {
+  logger.info('Received SIGTERM.');
+  closeServer();
+});
