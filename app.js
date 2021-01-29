@@ -69,7 +69,7 @@ function bearerAuth(req /* , scopes, definition */) {
   return Promise.reject(new Error('You must provide a token.'));
 }
 app.bearerAuth = bearerAuth;
-const apiDoc = yaml.safeLoad(fs.readFileSync(path.resolve(__dirname, 'api-doc.yml'), 'utf8'));
+const apiDoc = yaml.load(fs.readFileSync(path.resolve(__dirname, 'api-doc.yml'), 'utf8'));
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDoc));
 
